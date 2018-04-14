@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kaskelotti/fn-tools.svg?branch=master)](https://travis-ci.org/kaskelotti/fn-tools)
+
 # fn-tools
 
 Bunch of functional programming concepts in a module. Written on purpose of learning
