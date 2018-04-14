@@ -1,0 +1,21 @@
+{
+ "parserOptions": {
+      "ecmaVersion": 5,
+      "sourceType": "script",
+      "ecmaFeatures": {}
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    semi: "error",
+    vars-on-top: "error",
+    strict: "error"
+  },
+  "env": {
+    "jasmine": true
+    },
+  globals: {
+      "require": true,
+      "module": true
+    }
+
+}

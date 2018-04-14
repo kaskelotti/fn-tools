@@ -1,0 +1,16 @@
+{
+  "name": "fn-tools",
+  "version": "1.0.0",
+  "description": "Bunch of functional programming concepts in a module. Written on purpose of learning how functional programming concepts are built.",
+  "main": "fn-tools.js",
+  "dependencies": {
+    "jasmine": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jasmine"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
