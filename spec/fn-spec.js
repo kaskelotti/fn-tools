@@ -1,7 +1,7 @@
 describe("fn-tools spec", function() {
   'use strict';
 
-  var fn = require('../fn-tools.js');
+  var fn = require('../src/fn-tools.js');
 
   var dummies = {
     doNothing: function() {},
