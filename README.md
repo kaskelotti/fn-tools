@@ -13,12 +13,12 @@ For production use, there are better alternatives such as
 ## Notes
 
 - Using String#substring would be faster than String#slice, but here readability matters more
+- any / all go through the whole list even that it could return as soon as the matching criteria is filled
 
 ## Feature Ideas
 
 - trampoline
 - filter
-- any / all
 - contains
 - zip / unzip
 - Maybe / Option

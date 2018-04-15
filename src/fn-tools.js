@@ -84,6 +84,36 @@ var fn = (function(fn) {
       }
   };
 
+  fn.all = function(predicate, list) {
+    // fold expects a function with two arguments,
+    // thus wrapping the given predicate in order to use the seed
+    var wrapper = function(seed, value) {
+      return seed && predicate(value);
+    };
+
+    if(!list || list.length == 0) {
+      return false;
+    }
+    else {
+      return fn.fold(wrapper, true, list);
+    }
+  };
+
+  fn.any = function(predicate, list) {
+    // fold expects a function with two arguments,
+    // thus wrapping the given predicate in order to use the seed
+    var wrapper = function(seed, value) {
+      return seed || predicate(value);
+    };
+
+    if(!list || list.length == 0) {
+      return false;
+    }
+    else {
+      return fn.fold(wrapper, false, list);
+    }
+  };
+
   fn.forEach = function(f, list) {
     if(list.length == 0) {
       return;
