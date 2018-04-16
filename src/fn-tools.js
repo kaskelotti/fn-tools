@@ -2,19 +2,19 @@ var fn = (function(fn) {
   'use strict';
 
   fn.head = function(list) {
-    if(!list || list.length == 0) {
+    if(!list || list.length === 0) {
       return null;
     }
     return list[0];
   };
 
   fn.tail = function(list) {
-    if(!list && !(typeof list == "string")) {
+    if(!list && !(typeof list === "string")) {
       return null;
     }
 
     if(list.length <= 1) {
-      if(typeof list == "string") {
+      if(typeof list === "string") {
         return "";
       }
       return [];
@@ -24,14 +24,14 @@ var fn = (function(fn) {
 
   fn.drop = function(n, list) {
     if(!list) {
-      if(typeof list == "string") {
+      if(typeof list === "string") {
         return "";
       }
       return null;
     }
 
     if(list.length <= n) {
-      if(typeof list == "string") {
+      if(typeof list === "string") {
         return "";
       }
       return [];
@@ -44,7 +44,7 @@ var fn = (function(fn) {
   fn.take = function(n, list) {
     var copy;
 
-    if(!list && !(typeof list == "string")) {
+    if(!list && !(typeof list === "string")) {
       return null;
     }
 
@@ -52,7 +52,7 @@ var fn = (function(fn) {
       return list;
     }
     else {
-      if(typeof list == "string") {
+      if(typeof list === "string") {
         return list.substring(0, n);
       }
       else {
@@ -91,7 +91,7 @@ var fn = (function(fn) {
       return seed && predicate(value);
     };
 
-    if(!list || list.length == 0) {
+    if(!list || list.length === 0) {
       return false;
     }
     else {
@@ -106,7 +106,7 @@ var fn = (function(fn) {
       return seed || predicate(value);
     };
 
-    if(!list || list.length == 0) {
+    if(!list || list.length === 0) {
       return false;
     }
     else {
@@ -115,11 +115,11 @@ var fn = (function(fn) {
   };
 
   fn.forEach = function(f, list) {
-    if(list.length == 0) {
+    if(list.length === 0) {
       return;
     }
 
-    if(list.length == 1) {
+    if(list.length === 1) {
       f(fn.head(list));
     }
     else {
@@ -134,17 +134,17 @@ var fn = (function(fn) {
     // NOTE: typeof null == 'object'
     if(criteria === null) {
       return fn.any(function(value) {
-        return value == null;
+        return value === null;
       }, list);
     }
 
-    if(type == "function") {
+    if(type === "function") {
       return fn.any(criteria, list);
     }
 
-    if(type == "string" || type == "number" || type == "boolean") {
+    if(type === "string" || type === "number" || type === "boolean") {
       return fn.any(function(value) {
-        return value == criteria;
+        return value === criteria;
       }, list);
     }
 
@@ -153,7 +153,7 @@ var fn = (function(fn) {
 
   fn.map = function(f, list) {
     var _map = function(f, list, mod) {
-      if(list.length == 1) {
+      if(list.length === 1) {
         mod.push(f(fn.head(list)));
         return mod;
       }
@@ -163,7 +163,7 @@ var fn = (function(fn) {
       }
     };
 
-    if(list.length == 0) {
+    if(list.length === 0) {
       return [];
     }
     else {
@@ -175,7 +175,7 @@ var fn = (function(fn) {
     var _pipe = function(value, fns) {
       var f = fn.head(fns);
 
-      if(fns.length == 1) {
+      if(fns.length === 1) {
         return f(value);
       }
       else {
@@ -186,7 +186,7 @@ var fn = (function(fn) {
     };
 
     var args = fn.tail(Array.prototype.slice.call(arguments));
-    if(!args || args.length == 0) {
+    if(!args || args.length === 0) {
       return value;
     }
     else {

@@ -350,7 +350,7 @@ describe("fn-tools spec", function() {
   });
 
   describe("any", function() {
-    var isEven = function(value) { return value % 2  == 0; };
+    var isEven = function(value) { return value % 2  === 0; };
 
     it("Given null as input, should return false", function() {
       expect(fn.any(isEven, null)).toBe(false);
