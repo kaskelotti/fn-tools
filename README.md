@@ -19,6 +19,5 @@ For production use, there are better alternatives such as
 
 - trampoline
 - filter
-- contains
 - zip / unzip
 - Maybe / Option

@@ -128,6 +128,29 @@ var fn = (function(fn) {
     }
   };
 
+  fn.contains = function(criteria, list) {
+    var type = typeof criteria;
+
+    // NOTE: typeof null == 'object'
+    if(criteria === null) {
+      return fn.any(function(value) {
+        return value == null;
+      }, list);
+    }
+
+    if(type == "function") {
+      return fn.any(criteria, list);
+    }
+
+    if(type == "string" || type == "number" || type == "boolean") {
+      return fn.any(function(value) {
+        return value == criteria;
+      }, list);
+    }
+
+    throw new TypeError("Sorry, only supports basic type or function criteria :(");
+  };
+
   fn.map = function(f, list) {
     var _map = function(f, list, mod) {
       if(list.length == 1) {
