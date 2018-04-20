@@ -18,6 +18,5 @@ For production use, there are better alternatives such as
 ## Feature Ideas
 
 - trampoline
-- filter
 - zip / unzip
 - Maybe / Option

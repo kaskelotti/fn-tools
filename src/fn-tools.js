@@ -1,6 +1,31 @@
 var fn = (function(fn) {
   'use strict';
 
+  var utils = {
+    createPredicate: function(criteria) {
+      var type = typeof criteria;
+
+      // NOTE: typeof null == 'object'
+      if(criteria === null) {
+        return function(value) {
+          return value === null;
+        };
+      }
+
+      if(type === "function") {
+        return criteria;
+      }
+
+      if(type === "string" || type === "number" || type === "boolean") {
+        return function(value) {
+          return value === criteria;
+        };
+      }
+
+      throw new TypeError("Sorry, only supports basic type, null or function criteria :(");
+    }
+  };
+
   fn.head = function(list) {
     if(!list || list.length === 0) {
       return null;
@@ -129,26 +154,34 @@ var fn = (function(fn) {
   };
 
   fn.contains = function(criteria, list) {
-    var type = typeof criteria;
+    var predicate = utils.createPredicate(criteria);
+    return fn.any(predicate, list);
+  };
 
-    // NOTE: typeof null == 'object'
-    if(criteria === null) {
-      return fn.any(function(value) {
-        return value === null;
-      }, list);
+  fn.filter = function(criteria, list) {
+    var predicate = utils.createPredicate(criteria);
+    var _filter = function(list, filtered) {
+      var head = fn.head(list);
+
+      if(list.length === 1) {
+        return predicate(head) ? filtered.concat(head) : filtered;
+      }
+      else {
+        return _filter(
+                      fn.tail(list),
+                      predicate(head) ? filtered.concat(head) : filtered);
+      }
+    };
+
+    if(!list) {
+      return null;
     }
 
-    if(type === "function") {
-      return fn.any(criteria, list);
+    if(list.length === 0) {
+      return [];
     }
 
-    if(type === "string" || type === "number" || type === "boolean") {
-      return fn.any(function(value) {
-        return value === criteria;
-      }, list);
-    }
-
-    throw new TypeError("Sorry, only supports basic type or function criteria :(");
+    return _filter(list,[]);
   };
 
   fn.map = function(f, list) {
