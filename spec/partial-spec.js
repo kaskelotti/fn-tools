@@ -1,46 +1,46 @@
-describe("partial", function() {
+describe("partial", () => {
   'use strict';
 
-  const fn = require('../src/fn-tools.js');
+  const {partial} = require('../src/fn-tools.js');
   const dummies = require('./helpers/dummies.js');
 
-  it("with no arguments", function() {
-    var partial = fn.partial(dummies.doNothing);
-    partial();
+  it("with no arguments", () => {
+    const f = partial(dummies.doNothing);
+    f();
 
     expect(dummies.doNothing).toHaveBeenCalled();
   });
 
-  it("with single argument", function() {
-    var partial = fn.partial(dummies.doNothing);
-    partial("hello");
+  it("with single argument", () => {
+    const f = partial(dummies.doNothing);
+    f("hello");
 
     expect(dummies.doNothing).toHaveBeenCalledWith("hello");
   });
 
-  it("with two arguments", function() {
-    var partial = fn.partial(dummies.doNothing);
-    partial("hello", "world");
+  it("with two arguments", () => {
+    const f = partial(dummies.doNothing);
+    f("hello", "world");
 
     expect(dummies.doNothing).toHaveBeenCalledWith("hello", "world");
   });
 
-  it("with argument to target function", function() {
-    var partial = fn.partial(dummies.doNothing, "hello");
-    partial();
+  it("with argument to target function", () => {
+    const f = partial(dummies.doNothing, "hello");
+    f();
 
     expect(dummies.doNothing).toHaveBeenCalledWith("hello");
   });
 
-  it("with arguments to both target and partial functions", function() {
-    var partial = fn.partial(dummies.doNothing, "hello");
-    partial("world");
+  it("with arguments to both target and partial functions", () => {
+    const f = partial(dummies.doNothing, "hello");
+    f("world");
 
     expect(dummies.doNothing).toHaveBeenCalledWith("hello", "world");
   });
 
-  it("Given that returned partial function is not used, should not call the target either", function() {
-    fn.partial(dummies.doNothing);
+  it("Given that returned partial function is not used, should not call the target either", () => {
+    partial(dummies.doNothing);
     expect(dummies.doNothing).not.toHaveBeenCalled();
   });
 });

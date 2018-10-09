@@ -2,15 +2,15 @@ const dummies = (() => {
   'use strict';
 
   return {
-    doNothing: function() {},
-    fortyTwo: function() { return 42; },
-    add: function(a, b) { return a + b; },
-    charToInt: function(str) { return str.charCodeAt(0); },
-    increment: function(a) { return a + 1; }
+    doNothing: () => {},
+    fortyTwo: () => 42,
+    add: (a, b) => a + b,
+    charToInt: (str) => str.charCodeAt(0),
+    increment: (a) => a + 1
   };
 })();
 
-beforeEach(function() {
+beforeEach(() => {
   'use strict';
 
   spyOn(dummies, "doNothing").and.callThrough();
