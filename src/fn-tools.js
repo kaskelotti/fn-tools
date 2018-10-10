@@ -101,7 +101,10 @@ var fn = (function(fn) {
   fn.partial = (f, ...partialArgs) => (...args) => f.apply(null, partialArgs.concat(args));
 
   fn.fold = (f, seed, list) => {
-    if(list.length <= 1) {
+    if(!list || list.length === 0) {
+      return null;
+    }
+    else if(list.length === 1) {
       return f(seed, fn.head(list));
     }
     else {

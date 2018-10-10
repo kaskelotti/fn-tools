@@ -6,11 +6,18 @@ describe("fold", () => {
 
   const seed = 7;
 
-  it("Given empty list, should call given function with null arg and return value from that", () => {
+  it("Given null list, should return null and not call the given function", () => {
+    const result = fold(dummies.fortyTwo, seed, null);
+
+    expect(dummies.fortyTwo.calls.count()).toBe(0);
+    expect(result).toBe(null);
+  });
+
+  it("Given empty list, should return null and not call the given function", () => {
     const result = fold(dummies.fortyTwo, seed, []);
 
-    expect(dummies.fortyTwo).toHaveBeenCalledWith(seed, null);
-    expect(result).toBe(42);
+    expect(dummies.fortyTwo.calls.count()).toBe(0);
+    expect(result).toBe(null);
   });
 
   it("Given single element list, should call given function with the first element and return value from that", () => {
