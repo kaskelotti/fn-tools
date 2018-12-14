@@ -195,20 +195,18 @@ var fn = (function(fn) {
       _map(f, list, []);
   };
 
-  fn.pipe = (value, ...fns) => {
-    const _pipe = (value, fns) => {
-      const f = fn.head(fns);
+  fn.identity = value => value;
 
-      return fns.length === 1 ?
-        f(value) :
-        _pipe(
-              f(value),
-              fn.tail(fns));
-    };
-
-    return !fns || fns.length === 0 ?
-      value :
-      _pipe(value, fns);
+  fn.pipe = (...fns) => {
+    if(!fns || fns.length === 0) {
+      return fn.identity;
+    }
+    
+    return fn.fold(
+      (a, b) => value => b(a(value)),
+      fn.identity,
+      fns
+    );
   };
 
   return fn;
