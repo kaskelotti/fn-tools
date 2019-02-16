@@ -43,4 +43,14 @@ describe("partial", () => {
     partial(dummies.doNothing);
     expect(dummies.doNothing).not.toHaveBeenCalled();
   });
+
+  it("Given function that refers to context with this, should not pollute global namespace", () => {
+    /* eslint-disable no-undef */
+    partial(polluter)();
+    expect(global.meaning).toBeUndefined();
+    /* eslint-enable */
+  });
 });
+
+// eslint-disable-next-line strict
+const polluter = function() { this.meaning = 42; };

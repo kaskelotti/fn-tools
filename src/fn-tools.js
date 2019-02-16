@@ -98,7 +98,10 @@ var fn = (function(fn) {
       _take(collection);
   };
 
-  fn.partial = (f, ...partialArgs) => (...args) => f.apply(null, partialArgs.concat(args));
+  fn.partial = (f, ...partialArgs) => (...args) => {
+    const emptyCtx = Object.create(null);
+    return f.apply(emptyCtx, partialArgs.concat(args));
+  };
 
   fn.fold = (f, seed, list) => {
     if(!list || list.length === 0) {
@@ -201,7 +204,7 @@ var fn = (function(fn) {
     if(!fns || fns.length === 0) {
       return fn.identity;
     }
-    
+
     return fn.fold(
       (a, b) => value => b(a(value)),
       fn.identity,
